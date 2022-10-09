@@ -1,4 +1,10 @@
 # -*- coding:GBK -*-
+# *******************************************
+# ä½œè€…: æˆ‘æ±
+# mail:wodong526@dingtalk.com
+# time:2022/10/9
+# ç‰ˆæœ¬ï¼šV1.0
+# ******************************************
 from PySide2 import QtCore
 from PySide2 import QtWidgets
 from PySide2 import QtGui
@@ -24,9 +30,9 @@ class CREATE_TRACK(QtWidgets.QDialog):
     def __init__(self, parent=maya_main_window()):
         super(CREATE_TRACK, self).__init__(parent)
 
-        self.setWindowTitle(u'×Ô¶¯Éú³ÉÂÄ´ø')
-        if mc.about(ntOS=True):  # ÅĞ¶ÏÏµÍ³ÀàĞÍ
-            self.setWindowFlags(self.windowFlags() ^ QtCore.Qt.WindowContextHelpButtonHint)  # É¾³ı´°¿ÚÉÏµÄ°ïÖú°´Å¥
+        self.setWindowTitle(u'æ±ç‰Œè‡ªåŠ¨ç”Ÿæˆå±¥å¸¦ V1.0')
+        if mc.about(ntOS=True):  # åˆ¤æ–­ç³»ç»Ÿç±»å‹
+            self.setWindowFlags(self.windowFlags() ^ QtCore.Qt.WindowContextHelpButtonHint)  # åˆ é™¤çª—å£ä¸Šçš„å¸®åŠ©æŒ‰é’®
         elif mc.about(macOS=True):
             self.setWindowFlags(QtCore.Qt.Tool)
 
@@ -39,46 +45,46 @@ class CREATE_TRACK(QtWidgets.QDialog):
         self.if_mod = False
 
     def create_widgets(self):
-        self.name_lab = QtWidgets.QLabel(u'Ãû×Ö')
+        self.name_lab = QtWidgets.QLabel(u'åå­—')
 
-        self.get_curve_but = QtWidgets.QPushButton(u'»ñÈ¡ÇúÏß')
-        self.get_mod_but = QtWidgets.QPushButton(u'»ñÈ¡Ä£ĞÍ')
-        self.ctl_but = QtWidgets.QPushButton(u'¿ØÖÆÆ÷')
+        self.get_curve_but = QtWidgets.QPushButton(u'è·å–æ›²çº¿')
+        self.get_mod_but = QtWidgets.QPushButton(u'è·å–æ¨¡å‹')
+        self.ctl_but = QtWidgets.QPushButton(u'æ§åˆ¶å™¨')
 
         self.name_lin = QtWidgets.QLineEdit()
-        self.name_lin.setToolTip(u'ÊäÈëÃû³Æ¹Ø¼ü×Ö')
+        self.name_lin.setToolTip(u'è¾“å…¥åç§°å…³é”®å­—')
         validator = QtGui.QRegExpValidator(self)
         validator.setRegExp(QtCore.QRegExp('[a-zA-Z][a-zA-Z0-9_]+'))
         self.name_lin.setValidator(validator)
         self.curve_lin = QtWidgets.QLineEdit()
         self.curve_lin.setEnabled(False)
-        self.curve_lin.setToolTip(u'µã»÷°´Å¥¼ÓÔØÑ¡ÖĞµÄ±ÕºÏÇúÏß')
+        self.curve_lin.setToolTip(u'ç‚¹å‡»æŒ‰é’®åŠ è½½é€‰ä¸­çš„é—­åˆæ›²çº¿')
         self.curve_lin.setFocusPolicy(QtCore.Qt.NoFocus)
         self.mod_lin = QtWidgets.QLineEdit()
         self.mod_lin.setEnabled(False)
-        self.mod_lin.setToolTip(u'µã»÷°´Å¥¼ÓÔØÂÄ´ø×é¼ş')
+        self.mod_lin.setToolTip(u'ç‚¹å‡»æŒ‰é’®åŠ è½½å±¥å¸¦ç»„ä»¶')
         self.mod_lin.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ctl_lin = QtWidgets.QLineEdit()
         self.ctl_lin.setEnabled(False)
-        self.ctl_lin.setToolTip(u'µã»÷°´Å¥¼ÓÔØÂÄ´ø¿ØÖÆÆ÷')
+        self.ctl_lin.setToolTip(u'ç‚¹å‡»æŒ‰é’®åŠ è½½å±¥å¸¦æ§åˆ¶å™¨')
 
-        self.create_track_but = QtWidgets.QPushButton(u'Éú³ÉÂÄ´ø')
+        self.create_track_but = QtWidgets.QPushButton(u'ç”Ÿæˆå±¥å¸¦å‚è€ƒ')
         self.trackQuantity_sp = QtWidgets.QSpinBox()
         self.trackQuantity_sp.setValue(30)
         self.trackQuantity_sp.setMinimum(1)
 
-        self.undoTrack_but = QtWidgets.QPushButton(u'ÖØ×öÂÄ´ø')
+        self.undoTrack_but = QtWidgets.QPushButton(u'é‡åšå±¥å¸¦')
         self.undoTrack_but.setEnabled(False)
-        self.conn_but = QtWidgets.QPushButton(u'Éú³ÉÁ´½Ó')
+        self.conn_but = QtWidgets.QPushButton(u'ç”Ÿæˆé“¾æ¥')
         self.conn_but.setEnabled(False)
 
-        self.transverse_rvs_but = QtWidgets.QPushButton(u'XÖáĞı×ª90¶È')
+        self.transverse_rvs_but = QtWidgets.QPushButton(u'å±¥å¸¦æ­£åç¿»è½¬')
         self.transverse_rvs_but.setEnabled(False)
-        self.vertical_rvs_but = QtWidgets.QPushButton(u'yÖáĞı×ª90¶È')
+        self.vertical_rvs_but = QtWidgets.QPushButton(u'å±¥å¸¦æœå‘ç¿»è½¬')
         self.vertical_rvs_but.setEnabled(False)
-        self.portrait_rvs_but = QtWidgets.QPushButton(u'zÖáĞı×ª180¶È')
+        self.portrait_rvs_but = QtWidgets.QPushButton(u'å±¥å¸¦æŒ‡å‘è°ƒæ•´')
         self.portrait_rvs_but.setEnabled(False)
-        self.create_ctl_but = QtWidgets.QPushButton(u'Éú³É¿ØÖÆÆ÷')
+        self.create_ctl_but = QtWidgets.QPushButton(u'ç”Ÿæˆæ§åˆ¶å™¨')
         self.create_ctl_but.setEnabled(False)
 
     def create_layout(self):
@@ -107,8 +113,8 @@ class CREATE_TRACK(QtWidgets.QDialog):
 
     def get_curve(self):
         '''
-        Ñ¡ÔñÓÃÓÚÈ·¶¨ÂÄ´øÎ»ÖÃ·¶Î§µÄÁ½ÌõÇúÏß£¬Í¨¹ıÑ¡ÔñÌõ¼şÉ¸Ñ¡ÎªÖ»ÄÜÎªÁ½¸öÎïÌåµÄÇúÏß¶ÔÏó
-        Éú³ÉÀà±äÁ¿self.curveAll½ÓÊÕÕâÁ½ÌõÇúÏßµÄtrsÃû
+        é€‰æ‹©ç”¨äºç¡®å®šå±¥å¸¦ä½ç½®èŒƒå›´çš„ä¸¤æ¡æ›²çº¿ï¼Œé€šè¿‡é€‰æ‹©æ¡ä»¶ç­›é€‰ä¸ºåªèƒ½ä¸ºä¸¤ä¸ªç‰©ä½“çš„æ›²çº¿å¯¹è±¡
+        ç”Ÿæˆç±»å˜é‡self.curveAllæ¥æ”¶è¿™ä¸¤æ¡æ›²çº¿çš„trså
         :return:
         '''
         sel_lis = mc.ls(sl = True)
@@ -121,20 +127,20 @@ class CREATE_TRACK(QtWidgets.QDialog):
                     if mc.nodeType(shp) == 'nurbsCurve':
                         crv_lis = crv_lis + crv + ','
                     else:
-                        log.error('¶ÔÏó{}²»ÊÇÇúÏß'.format(crv))
+                        log.error('å¯¹è±¡{}ä¸æ˜¯æ›²çº¿'.format(crv))
                         return False
                 else:
-                    log.error('¶ÔÏó{}²»ÊÇÇúÏß¡£'.format(crv))
+                    log.error('å¯¹è±¡{}ä¸æ˜¯æ›²çº¿ã€‚'.format(crv))
         else:
-            log.error('Ó¦Ñ¡Ôñ2¸ö¶ÔÏó£¬Êµ¼ÊÑ¡Ôñ{}¸ö¡£'.format(len(sel_lis)))
+            log.error('åº”é€‰æ‹©2ä¸ªå¯¹è±¡ï¼Œå®é™…é€‰æ‹©{}ä¸ªã€‚'.format(len(sel_lis)))
             return False
         self.curve_lin.setText(crv_lis)
-        self.curveAll = copy.copy(sel_lis)#ÇúÏß
+        self.curveAll = copy.copy(sel_lis)#æ›²çº¿
 
     def get_mode(self):
         '''
-        Ñ¡Ôñµ¥¸öÂÄ´øËùÓÃµ½µÄÄ£ĞÍ£¬Í¨¹ıÑ¡ÔñÌõ¼şÉ¸Ñ¡ÎªÖ»ÄÜÎªÒ»¸öÎïÌåµÄ¶à±ßĞÎ¶ÔÏó
-        Éú³ÉÀà±äÁ¿self.modAll½ÓÊÕ¸ÃÄ£ĞÍµÄtrsÃû
+        é€‰æ‹©å•ä¸ªå±¥å¸¦æ‰€ç”¨åˆ°çš„æ¨¡å‹ï¼Œé€šè¿‡é€‰æ‹©æ¡ä»¶ç­›é€‰ä¸ºåªèƒ½ä¸ºä¸€ä¸ªç‰©ä½“çš„å¤šè¾¹å½¢å¯¹è±¡
+        ç”Ÿæˆç±»å˜é‡self.modAllæ¥æ”¶è¯¥æ¨¡å‹çš„trså
         :return:
         '''
         sel_lis = mc.ls(sl=True)
@@ -147,20 +153,20 @@ class CREATE_TRACK(QtWidgets.QDialog):
                     if mc.nodeType(shp) == 'mesh':
                         mod_lis = mod_lis + obj + ','
                     else:
-                        log.error('¶ÔÏó{}²»ÊÇÄ£ĞÍ'.format(obj))
+                        log.error('å¯¹è±¡{}ä¸æ˜¯æ¨¡å‹'.format(obj))
                         return False
                 else:
-                    log.error('¶ÔÏó{}²»ÊÇÄ£ĞÍ¡£'.format(obj))
+                    log.error('å¯¹è±¡{}ä¸æ˜¯æ¨¡å‹ã€‚'.format(obj))
         else:
-            log.error('Ó¦Ñ¡Ôñ1¸ö¶ÔÏó£¬Êµ¼ÊÑ¡Ôñ{}¸ö¡£'.format(len(sel_lis)))
+            log.error('åº”é€‰æ‹©1ä¸ªå¯¹è±¡ï¼Œå®é™…é€‰æ‹©{}ä¸ªã€‚'.format(len(sel_lis)))
             return False
         self.mod_lin.setText(mod_lis)
-        self.modAll = copy.copy(sel_lis)[0]#Ä£ĞÍ
+        self.modAll = copy.copy(sel_lis)[0]#æ¨¡å‹
 
     def get_ctl(self):
         '''
-        Ñ¡ÔñÓÃÓÚ¿ØÖÆÂÄ´øÔË¶¯µÄ¿ØÖÆÃû³Æ£¬¸Ã¿ØÖÆÆ÷½«±»ÓÃÓÚÌí¼ÓÊôĞÔÀ´µÃµ½ÂÄ´øÔË¶¯µÄĞ§¹û
-        Éú³ÉÀà±äÁ¿self.ctl½ÓÊÕ¸Ã¿ØÖÆÆ÷µÄtrsÃû
+        é€‰æ‹©ç”¨äºæ§åˆ¶å±¥å¸¦è¿åŠ¨çš„æ§åˆ¶åç§°ï¼Œè¯¥æ§åˆ¶å™¨å°†è¢«ç”¨äºæ·»åŠ å±æ€§æ¥å¾—åˆ°å±¥å¸¦è¿åŠ¨çš„æ•ˆæœ
+        ç”Ÿæˆç±»å˜é‡self.ctlæ¥æ”¶è¯¥æ§åˆ¶å™¨çš„trså
         :return:
         '''
         sel = mc.ls(sl=True)
@@ -171,37 +177,37 @@ class CREATE_TRACK(QtWidgets.QDialog):
                     self.ctl_lin.setText(sel[0])
                     self.ctl = sel[0]
                 else:
-                    log.error('Ñ¡Ôñ¶ÔÏó²»ÊÇÇúÏß¡£')
+                    log.error('é€‰æ‹©å¯¹è±¡ä¸æ˜¯æ›²çº¿ã€‚')
                     return False
             else:
-                log.error('Ñ¡Ôñ¶ÔÏó²»ÊÇÇúÏß¡£')
+                log.error('é€‰æ‹©å¯¹è±¡ä¸æ˜¯æ›²çº¿ã€‚')
                 return False
         else:
-            log.error('Ó¦Ñ¡Ôñ1¸ö¶ÔÏó£¬Êµ¼ÊÑ¡Ôñ{}¸ö¡£'.format(len(sel)))
+            log.error('åº”é€‰æ‹©1ä¸ªå¯¹è±¡ï¼Œå®é™…é€‰æ‹©{}ä¸ªã€‚'.format(len(sel)))
             return False
 
     def set_track(self):
         '''
-        ÒÀ´ÎÅĞ¶Ï¸÷ĞĞ±à¼­Æ÷ÀïÓĞÎŞÊäÈë£¬ÓĞ²ÅÄÜ¼ÌĞøÖ´ĞĞ£¬ÉÙÊäÈëÔò´ò¶ÏÖ´ĞĞ
-        Éú³ÉĞèÒª·ÅÖÃÂÄ´øÄ£ĞÍ¡¢ÃÉÆ¤¹Ø½Ú¡¢¸¸×ÓÁ´½Ó¡¢ÇúÏßÇúÃæ¡¢xformµÄ×é£¬²¢°ÑÇúÏßÇúÃæËùÔÚµÄ×é·Åµ½xformÏÂ
-        ÔÚ__init__º¯ÊıÀï½¨Á¢µÄÀà±äÁ¿self.if_modÓÃÀ´ÅĞ¶Ïµ±Ç°»·½ÚÊÇ·ñÎªÖØ×öÂÄ´øÇé¿ö£¬
-        µ±Îª¼ÙÊ±£¬ÇúÃæºÍÇúÏß»¹Î´Éú³É£¬Ôò»áÔÚÉú³ÉºóÔÙ½øÈëÅÅÁĞÄ£ĞÍµÄº¯Êı£¬ÔÚº¯ÊıÔËĞĞºóif_mod»áÎªÕæ£¬ÔÙ´ÎÔËĞĞ¸Ãº¯Êı»áÌø¹ıÉú³ÉÇúÏßÇúÃæ
-        ÇúÏßµÄÊàÖáÎ»ÖÃ»áÉèÖÃµ½¸¸¼¶¶ÔÏóµÄÊàÖáÎ»ÖÃ£¬ÒÔ´ËÀ´´ïµ½ÔÚºóÆÚÉú³ÉµÄ¹Ø½ÚÊ±ÒÔ¸¸¼¶¶ÔÏóËùÔÚÎ»ÖÃ½øĞĞ¼ÆËãÏà¶ÔÎ»ÖÃ
+        ä¾æ¬¡åˆ¤æ–­å„è¡Œç¼–è¾‘å™¨é‡Œæœ‰æ— è¾“å…¥ï¼Œæœ‰æ‰èƒ½ç»§ç»­æ‰§è¡Œï¼Œå°‘è¾“å…¥åˆ™æ‰“æ–­æ‰§è¡Œ
+        ç”Ÿæˆéœ€è¦æ”¾ç½®å±¥å¸¦æ¨¡å‹ã€è’™çš®å…³èŠ‚ã€çˆ¶å­é“¾æ¥ã€æ›²çº¿æ›²é¢ã€xformçš„ç»„ï¼Œå¹¶æŠŠæ›²çº¿æ›²é¢æ‰€åœ¨çš„ç»„æ”¾åˆ°xformä¸‹
+        åœ¨__init__å‡½æ•°é‡Œå»ºç«‹çš„ç±»å˜é‡self.if_modç”¨æ¥åˆ¤æ–­å½“å‰ç¯èŠ‚æ˜¯å¦ä¸ºé‡åšå±¥å¸¦æƒ…å†µï¼Œ
+        å½“ä¸ºå‡æ—¶ï¼Œæ›²é¢å’Œæ›²çº¿è¿˜æœªç”Ÿæˆï¼Œåˆ™ä¼šåœ¨ç”Ÿæˆåå†è¿›å…¥æ’åˆ—æ¨¡å‹çš„å‡½æ•°ï¼Œåœ¨å‡½æ•°è¿è¡Œåif_modä¼šä¸ºçœŸï¼Œå†æ¬¡è¿è¡Œè¯¥å‡½æ•°ä¼šè·³è¿‡ç”Ÿæˆæ›²çº¿æ›²é¢
+        æ›²çº¿çš„æ¢è½´ä½ç½®ä¼šè®¾ç½®åˆ°çˆ¶çº§å¯¹è±¡çš„æ¢è½´ä½ç½®ï¼Œä»¥æ­¤æ¥è¾¾åˆ°åœ¨åæœŸç”Ÿæˆçš„å…³èŠ‚æ—¶ä»¥çˆ¶çº§å¯¹è±¡æ‰€åœ¨ä½ç½®è¿›è¡Œè®¡ç®—ç›¸å¯¹ä½ç½®
         :return:
         '''
         if not self.name_lin.text():
-            log.error('Ã»ÓĞÊäÈëÃû³Æ¡£')
+            log.error('æ²¡æœ‰è¾“å…¥åç§°ã€‚')
             return False
         else:
             self.nam = self.name_lin.text()
         if not self.curve_lin.text():
-            log.error('Ã»ÓĞÑ¡ÔñÇúÏß¡£')
+            log.error('æ²¡æœ‰é€‰æ‹©æ›²çº¿ã€‚')
             return False
         if not self.mod_lin.text():
-            log.error('Ã»ÓĞÑ¡ÔñÂÄ´ø×é¼ş¡£')
+            log.error('æ²¡æœ‰é€‰æ‹©å±¥å¸¦ç»„ä»¶ã€‚')
             return False
         if not self.ctl_lin.text():
-            log.error('Ã»ÓĞÑ¡Ôñ¿ØÖÆÆ÷¡£')
+            log.error('æ²¡æœ‰é€‰æ‹©æ§åˆ¶å™¨ã€‚')
             return False
 
         if not mc.objExists('grp_xform_D'):
@@ -244,7 +250,7 @@ class CREATE_TRACK(QtWidgets.QDialog):
             self.loft_suf_shp = mc.listRelatives(self.loft_suf, s = True)[0]
 
             crvInfo_node = mc.createNode('curveFromSurfaceIso', n = 'crvIso_{}_pathInfo_001'.format(self.nam))
-            mc.setAttr('{}.isoparmValue'.format(crvInfo_node), 0.5)#½«Éú³ÉµÄÇúÏßÂ·¾¶·Åµ½ÊäÈëÇúÃæµÄÖĞ¼ä
+            mc.setAttr('{}.isoparmValue'.format(crvInfo_node), 0.5)#å°†ç”Ÿæˆçš„æ›²çº¿è·¯å¾„æ”¾åˆ°è¾“å…¥æ›²é¢çš„ä¸­é—´
             mc.connectAttr('{}.worldSpace[0]'.format(self.loft_suf_shp), '{}.inputSurface'.format(crvInfo_node))
 
             self.crv_path_shp = mc.createNode('nurbsCurve', n = 'crv_{}_path_001Shape'.format(self.nam))
@@ -261,8 +267,8 @@ class CREATE_TRACK(QtWidgets.QDialog):
 
     def for_create_ref(self):
         '''
-        ½«ÊäÈëµÄÄ£ĞÍÊıÁ¿ÒÀ´ÎÓÃmotionPath½øĞĞÁ´½Ó£¬ÓÃÒÔ²é¿´Î»ÖÃÊÇ·ñºÏÊÊ
-        ÔÚ¸Ãº¯ÊıÔËĞĞºó£¬Éú³ÉÁ´½ÓµÈÄÇæ¤°´Å¥²ÅÔÊĞíÊ¹ÓÃ
+        å°†è¾“å…¥çš„æ¨¡å‹æ•°é‡ä¾æ¬¡ç”¨motionPathè¿›è¡Œé“¾æ¥ï¼Œç”¨ä»¥æŸ¥çœ‹ä½ç½®æ˜¯å¦åˆé€‚
+        åœ¨è¯¥å‡½æ•°è¿è¡Œåï¼Œç”Ÿæˆé“¾æ¥ç­‰é‚£å¦æŒ‰é’®æ‰å…è®¸ä½¿ç”¨
         :return:
         '''
         self.motPath_lis = []
@@ -282,7 +288,7 @@ class CREATE_TRACK(QtWidgets.QDialog):
 
     def undo_mod(self):
         '''
-        ½«Ä£ĞÍ×éÏÂµÄËùÓĞÄ£ĞÍ¶¼É¾³ı£¬ÓÉÓÚmotionPath½ÚµãÓëÄ£ĞÍÖ±½ÓÏàÁ¬£¬ËùÒÔÉ¾³ıÄ£ĞÍÊ±motionPath½Úµã»á×Ô¶¯±»É¾³ı£¬ÔòÔÚÉ¾³ı¸ÃÁĞ±íÊ±»á±¨´í
+        å°†æ¨¡å‹ç»„ä¸‹çš„æ‰€æœ‰æ¨¡å‹éƒ½åˆ é™¤ï¼Œç”±äºmotionPathèŠ‚ç‚¹ä¸æ¨¡å‹ç›´æ¥ç›¸è¿ï¼Œæ‰€ä»¥åˆ é™¤æ¨¡å‹æ—¶motionPathèŠ‚ç‚¹ä¼šè‡ªåŠ¨è¢«åˆ é™¤ï¼Œåˆ™åœ¨åˆ é™¤è¯¥åˆ—è¡¨æ—¶ä¼šæŠ¥é”™
         :return:
         '''
         del_lis = mc.listRelatives(self.mode_grp)
@@ -296,8 +302,8 @@ class CREATE_TRACK(QtWidgets.QDialog):
 
     def create_link(self):
         '''
-        Éú³ÉºËĞÄ¼ÆËã½Úµã
-        ÔÚËùÓĞ¹Ø½Ú¶¼Á´½ÓÍê³Éºó²ÅÄÜ»ñµÃÃ¿¸ö¹Ø½ÚµÄÏÂÒ»¸ö¹Ø½Ú£¬ËùÒÔĞèÒªµ¥¶ÀµÄÒ»¸öforÑ­»·À´¼ÆËãÏÂÒ»¸ö½ÚµãµÄÎ»ÖÃ
+        ç”Ÿæˆæ ¸å¿ƒè®¡ç®—èŠ‚ç‚¹
+        åœ¨æ‰€æœ‰å…³èŠ‚éƒ½é“¾æ¥å®Œæˆåæ‰èƒ½è·å¾—æ¯ä¸ªå…³èŠ‚çš„ä¸‹ä¸€ä¸ªå…³èŠ‚ï¼Œæ‰€ä»¥éœ€è¦å•ç‹¬çš„ä¸€ä¸ªforå¾ªç¯æ¥è®¡ç®—ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„ä½ç½®
         :return:
         '''
         mc.delete(mc.listRelatives(self.mode_grp))
@@ -345,14 +351,14 @@ class CREATE_TRACK(QtWidgets.QDialog):
             mc.connectAttr('{}.int_run'.format(loc), '{}.input1'.format(add_if_node))
             mc.connectAttr('{}.output'.format(add_if_node), '{}.colorIfFalseR'.format(cond_node))
 
-            #²»ÄÜÓÃÏà¼Ó½Úµã£¬ÕâÀïµÄ2Ñ¡ÏîÊÇÏà¼õ
+            #ä¸èƒ½ç”¨ç›¸åŠ èŠ‚ç‚¹ï¼Œè¿™é‡Œçš„2é€‰é¡¹æ˜¯ç›¸å‡
             plu_lvDai_node = mc.createNode('plusMinusAverage', n='plu_{}_{}'.format(self.nam, i_str))
             mc.setAttr('{}.operation'.format(plu_lvDai_node), 2)
             mc.connectAttr('{}.output'.format(add_def_node), '{}.input1D[0]'.format(plu_lvDai_node))
             mc.connectAttr('{}.outColorR'.format(cond_node), '{}.input1D[1]'.format(plu_lvDai_node))
 
             motPath = mc.createNode('motionPath', n='motPath_{}_{}'.format(self.nam, i_str))
-            mc.setAttr('{}.fractionMode'.format(motPath), 1)#´ò¿ªÔò°´ÇúÏß±ÈÀıÒÆ¶¯£¬¹Ø±ÕÔò°´Êµ¼ÊÎ»ÖÃÒÆ¶¯
+            mc.setAttr('{}.fractionMode'.format(motPath), 1)#æ‰“å¼€åˆ™æŒ‰æ›²çº¿æ¯”ä¾‹ç§»åŠ¨ï¼Œå…³é—­åˆ™æŒ‰å®é™…ä½ç½®ç§»åŠ¨
             mc.connectAttr('{}.worldSpace[0]'.format(self.crv_path_shp), '{}.geometryPath'.format(motPath))
             mc.connectAttr('{}.allCoordinates'.format(motPath), '{}.translate'.format(loc))
             mc.connectAttr('{}.output1D'.format(plu_lvDai_node), '{}.uValue'.format(motPath))
@@ -369,10 +375,12 @@ class CREATE_TRACK(QtWidgets.QDialog):
             aim_nod = mc.createNode('aimConstraint', n='aim_{}_{}'.format(self.nam, i_str))
             mc.parent(aim_nod, self.link_grp)
             self.aim_lis.append(aim_nod)
+            mc.setAttr('{}.aimVectorZ'.format(aim_nod), 1)#ä¸€èˆ¬å±¥å¸¦å•ç‰‡éƒ½æ˜¯zè½´å‘å‰ï¼Œæ‰€ä»¥è¦æŠŠé»˜è®¤æœå‘æ”¹ä¸€ä¸‹
+            mc.setAttr('{}.aimVectorX'.format(aim_nod), 0)#ä¸æ”¹ä¹Ÿå¯ä»¥åæœŸç”¨å…¶å®ƒæŒ‰é’®æ”¹
             mc.connectAttr('{}.normal'.format(sufInfo_node), '{}.worldUpVector'.format(aim_nod))
             for aix in ['X', 'Y', 'Z']:
                 mc.connectAttr('{}.constraintRotate{}'.format(aim_nod, aix), '{}.rotate{}'.format(loc, aix))
-            log.info('{}Á´½ÓÒÑÉú³É¡£'.format(loc))
+            log.info('{}é“¾æ¥å·²ç”Ÿæˆã€‚'.format(loc))
 
         for inf in range(self.trackQuantity_sp.value()):
             inf_str = str(inf + 1).rjust(3, '0')
@@ -387,13 +395,16 @@ class CREATE_TRACK(QtWidgets.QDialog):
             mc.connectAttr('{}.translate'.format(self.loc_lis[inf]), '{}.input3D[1]'.format(plus_aix_nod))
 
             mc.connectAttr('{}.output3D'.format(plus_aix_nod), '{}.target[0].targetTranslate'.format(self.aim_lis[inf]))
-            log.info('{}·½ÏòÔ¼ÊøÒÑÉú³É¡£'.format(self.loc_lis[inf]))
+            log.info('{}æ–¹å‘çº¦æŸå·²ç”Ÿæˆã€‚'.format(self.loc_lis[inf]))
 
+        self.create_track_but.setEnabled(False)
+        self.undoTrack_but.setEnabled(False)
+        self.conn_but.setEnabled(False)
         self.create_lvDai(mod_lis)
 
     def create_lvDai(self, mod_lis):
         '''
-        ½«¸´ÖÆµÄÂÄ´øÄ£ĞÍ·Åµ½¶ÔÓ¦Î»ÖÃ£¬²¢Óë¹Ø½Ú½øĞĞÃÉÆ¤
+        å°†å¤åˆ¶çš„å±¥å¸¦æ¨¡å‹æ”¾åˆ°å¯¹åº”ä½ç½®ï¼Œå¹¶ä¸å…³èŠ‚è¿›è¡Œè’™çš®
         :param mod_lis:
         :return:
         '''
@@ -407,16 +418,14 @@ class CREATE_TRACK(QtWidgets.QDialog):
             jnt = mc.joint(n='jnt_{}_{}'.format(self.nam, str(i + 1).rjust(3, '0')))
             mc.parent(jnt, self.jnt_grp)
 
-            #mc.makeIdentity(mod, a=True, r=True, s=True, n=False, pn=True)
             mc.xform(jnt, t=pos, ro=rot)
             mc.xform(mod, t=pos, ro=rot)
-            
             mc.makeIdentity(jnt, a=True, t=True, r=True, n=False, pn=True)
             mc.makeIdentity(mod, a=True, t=True, r=True, n=False, pn=True)
             mc.skinCluster(mod, jnt)
             link = mc.parentConstraint(loc, jnt, mo=True, n='parConn_{}_{}'.format(self.nam, str(i + 1).rjust(3, '0')))
             mc.parent(link, self.link_grp)
-        log.info('ÒÑ½¨Á¢¹Ø½ÚÓëÂÄ´øµ¥Æ¬Á´½Ó¡£')
+        log.info('å·²å»ºç«‹å…³èŠ‚ä¸å±¥å¸¦å•ç‰‡é“¾æ¥ã€‚')
         self.transverse_rvs_but.setEnabled(True)
         self.vertical_rvs_but.setEnabled(True)
         self.portrait_rvs_but.setEnabled(True)
@@ -424,68 +433,45 @@ class CREATE_TRACK(QtWidgets.QDialog):
 
     def transverse_rvs(self):
         '''
-        ÔÚÄ£ĞÍÓëÉÏÓÎµÄÄ¿±êÔ¼Êø½ÚµãÖ®¼äÌí¼Ó¼Ó¼õ½Úµã£¬ÓÃÒÔ½«·½Ïò¼Ó180¶È£¬ÔÚµÚÒ»´ÎÊ¹ÓÃÊ±»áÒòÎªĞèÒªÉú³É½Úµã¶ø»¨¸ü¶àµÄÊ±¼ä
+        æ”¹å˜ç›®æ ‡çº¦æŸèŠ‚ç‚¹çš„å‘ä¸Šè½´ï¼ˆyè½´ï¼‰çš„æ­£è´Ÿæ¥è¾¾åˆ°ä¸Šä¸‹ç¿»è½¬æ•ˆæœ
         :return:
         '''
-        if hasattr(self, 'transvs'):
-            for node in self.transvs:
-                try:
-                    old_val = mc.getAttr('{}.input2'.format(node))
-                    mc.setAttr('{}.input2'.format(node), 90 + old_val)
-                except:
-                    log.warning('½Úµã{}²ÎÊıĞŞ¸Ä´íÎó¡£'.format(node))
-            log.info('ÂÄ´øxÖá·½ÏòÒÑĞı×ª90¶È¡£')
-
-        else:
-            self.transvs = []
-            i = 0
-            for aim, jnt in zip(self.aim_lis, self.loc_lis):
-                i = i+1
-                i_str = str(i).rjust(3, '0')
-                add_node = mc.createNode('addDoubleLinear', n='add_rotX_{}_{}'.format(self.nam, i_str))
-                self.transvs.append(add_node)
-
-                mc.setAttr('{}.input2'.format(add_node), 90)
-                mc.connectAttr('{}.constraintRotateX'.format(aim), '{}.input1'.format(add_node))
-                mc.connectAttr('{}.output'.format(add_node), '{}.rotateX'.format(jnt), f=True)
-            log.info('ÂÄ´øxÖá·½ÏòÒÑĞı×ª90¶È¡£')
+        for aim in self.aim_lis:
+            old_aix = mc.getAttr('{}.upVectorY'.format(aim))
+            mc.setAttr('{}.upVectorY'.format(aim), old_aix*-1)
+        log.info('å±¥å¸¦å‘ä¸Šè½´å·²åå‘ã€‚')
 
     def vertical_rvs(self):
-        if hasattr(self, 'vertical'):
-            for node in self.vertical:
-                try:
-                    old_val = mc.getAttr('{}.input2'.format(node))
-                    mc.setAttr('{}.input2'.format(node), old_val + 90)
-                except:
-                    log.warning('½Úµã{}²ÎÊıĞŞ¸Ä´íÎó¡£'.format(node))
-            log.info('ÂÄ´øyÖá·½ÏòÒÑĞı×ª90¶È¡£')
-
-        else:
-            self.vertical = []
-            i = 0
-            for aim, jnt in zip(self.aim_lis, self.loc_lis):
-                i = i + 1
-                i_str = str(i).rjust(3, '0')
-                add_node = mc.createNode('addDoubleLinear', n='add_rotY_{}_{}'.format(self.nam, i_str))
-                self.vertical.append(add_node)
-
-                mc.setAttr('{}.input2'.format(add_node), 90)
-                mc.connectAttr('{}.constraintRotateY'.format(aim), '{}.input1'.format(add_node))
-                mc.connectAttr('{}.output'.format(add_node), '{}.rotateY'.format(jnt), f=True)
-            log.info('ÂÄ´øyÖá·½ÏòÒÑĞı×ª90¶È¡£')
+        '''
+        æ£€æµ‹æœ‰å€¼çš„é‚£ä¸ªæœå‘ï¼Œå¹¶å°†æœå‘ä¹˜è´Ÿä¸€æ¥è½¬å‘
+        :return:
+        '''
+        for aim in self.aim_lis:
+            aix = self.getAix(aim, 'aimVector')
+            old_aix = mc.getAttr('{}.aimVector{}'.format(aim, aix))
+            mc.setAttr('{}.aimVector{}'.format(aim, aix), old_aix * -1)
+        log.info('å±¥å¸¦æœå‘å·²åå‘ã€‚')
 
     def portrait_rvs(self):
         '''
-        ½«ÇúÃæ·´Ïò¾Í¿ÉÒÔÖ±½Ó×öµ½½«Â·¾¶·´×ªµÄĞ§¹û£¬µ«»áµ¼ÖÂÄ£ĞÍµÄÎ»ÖÃÒ²¸ú×Å·´×ª
+        æ£€æµ‹æœ‰å€¼çš„é‚£ä¸ªæœå‘ï¼Œå°†å…¶å½’é›¶ï¼Œå°†å…¶çš„å€¼ç»™åˆ°å¦ä¸€ä¸ªè½´ï¼Œç”±äºyè½´æ°¸è¿œéƒ½æ˜¯ç”¨äºå‘ä¸Šè½´ï¼Œæ‰€ä»¥è¿™é‡Œåªè€ƒè™‘xå’Œzè½´
         :return:
         '''
-        mc.reverseSurface(self.loft_suf, ch=False, d=0, rpo=True)
-        log.info('ÂÄ´øzÖá·½ÏòÒÑĞı×ª180¶È¡£')
+        for aim in self.aim_lis:
+            aix = self.getAix(aim, 'aimVector')
+            old_aix = mc.getAttr('{}.aimVector{}'.format(aim, aix))
+            if aix == 'X':
+                mc.setAttr('{}.aimVectorZ'.format(aim), old_aix)
+                mc.setAttr('{}.aimVector{}'.format(aim, aix), 0)
+            elif aix == 'Z':
+                mc.setAttr('{}.aimVectorX'.format(aim), old_aix)
+                mc.setAttr('{}.aimVector{}'.format(aim, aix), 0)
+        log.info('å±¥å¸¦æœå‘å·²æ›´æ¢ã€‚')
 
     def create_controller(self):
         '''
-        ÔÚÇúÃæµÄÃ¿Ò»ÅÅÖĞ¼äÉú³É¹Ø½Ú²¢¶ÔÇúÃæÃÉÆ¤£¬ÔÙÉú³É¿ØÖÆÆ÷
-        ½«ÃÉÆ¤¹Ø½ÚÖ±½Ó·Åµ½¿ØÖÆÆ÷µ×ÏÂ£¬ÒòÎªÇı¶¯Ä£ĞÍµÄ¹Ø½Ú²¢²»Ó°ÏìÇúÃæÃÉÆ¤¹Ø½Ú£¬ËùÒÔ²¢²»Ó°ÏìĞ§¹û
+        åœ¨æ›²é¢çš„æ¯ä¸€æ’ä¸­é—´ç”Ÿæˆå…³èŠ‚å¹¶å¯¹æ›²é¢è’™çš®ï¼Œå†ç”Ÿæˆæ§åˆ¶å™¨
+        å°†è’™çš®å…³èŠ‚ç›´æ¥æ”¾åˆ°æ§åˆ¶å™¨åº•ä¸‹ï¼Œå› ä¸ºé©±åŠ¨æ¨¡å‹çš„å…³èŠ‚å¹¶ä¸å½±å“æ›²é¢è’™çš®å…³èŠ‚ï¼Œæ‰€ä»¥å¹¶ä¸å½±å“æ•ˆæœ
         :return:
         '''
         ctl_grp = mc.group(n='grp_clt_{}'.format(self.nam), em=True, w=True)
@@ -525,15 +511,30 @@ class CREATE_TRACK(QtWidgets.QDialog):
 
             for aix in ['X', 'Y', 'Z']:
                 mc.setAttr('{}.scale{}'.format(ctl, aix), k=False, l=True, cb=False)
-            log.info('¿ØÖÆÆ÷{}´´½¨Íê³É¡£'.format(ctl))
+            log.info('æ§åˆ¶å™¨{}åˆ›å»ºå®Œæˆã€‚'.format(ctl))
         sclt = mc.skinCluster(jnt_lis, self.loft_suf)[0]
         for i in range(mc.getAttr('{}.spansU'.format(self.loft_suf))):
             mc.skinPercent(sclt, '{}.cv[{}][:]'.format(self.loft_suf, i), tv=[('{}'.format(jnt_lis[i]), 1)])
-        log.info('¿ØÖÆÆ÷Ğ§¹ûÒÑÍê³É¡£')
+        log.info('æ§åˆ¶å™¨æ•ˆæœå·²å®Œæˆã€‚')
+
+    def getAix(self, obj, typ):
+        '''
+        é€šè¿‡ä¼ å…¥å¯¹è±¡åå’Œå±æ€§åæ£€æµ‹å“ªä¸ªè½´å‘æœ‰å€¼
+        :return: è¿”å›æœ‰å€¼çš„é‚£ä¸ªè½´å‘
+        '''
+        val = []
+        for aix in ['X', 'Y', 'Z']:
+            if mc.getAttr('{}.{}{}'.format(obj, typ, aix)) != 0:
+                val.append(aix)
+
+        if len(val) == 1:
+            return val[0]
+        else:
+            log.error('{}çš„{}å±æ€§ç«Ÿç„¶æœ‰ä¸æ­¢ä¸€ä¸ªå€¼ã€‚'.format(obj, typ))
 
     def ctl_point(self):
         '''
-        ¿ØÖÆÆ÷ĞÎ×´µÄµãĞÅÏ¢
+        æ§åˆ¶å™¨å½¢çŠ¶çš„ç‚¹ä¿¡æ¯
         :return:
         '''
         pos = '''setAttr ".cc" -type "nurbsCurve"
